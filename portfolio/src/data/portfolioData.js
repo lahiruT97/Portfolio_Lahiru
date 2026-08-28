@@ -1,19 +1,19 @@
 ﻿export const personalInfo = {
   name: "Lahiru Pathiranage",
   title: "Software Engineer",
-  subtitle: "Backend Architecture · Azure Cloud · Microsoft Power Platform & AI Solutions",
-  status: "Available for high-impact roles & projects",
+  subtitle: "Backend Development · Azure Cloud · Microsoft Power Platform & AI Solutions",
+  status: "Available for new opportunities",
   location: "Colombo, Sri Lanka",
   phone: "+94 71 95 20 383",
   email: "lahiruthraka97@gmail.com",
   linkedin: "https://linkedin.com/in/lahiru-pathiranage-2330a0240",
   github: "https://github.com",
-  summary: `Results-driven Software Engineer with 3+ years of hands-on experience designing and delivering scalable backend architectures, cloud microservices, and enterprise Microsoft Power Platform solutions. Specialist in .NET 9, Azure Functions (Isolated Worker), Azure OpenAI & Cognitive Search integration, and Microsoft Dataverse custom development. Holds a First-Class Honors degree in Computer Science (GPA 3.75/4.00) with a proven track record of authoring high-performance APIs, automating complex business logic, and deploying enterprise-grade AI solutions.`,
+  summary: `Results-driven Software Engineer with 3+ years of hands-on experience designing and delivering scalable backend systems, cloud microservices, and enterprise Microsoft Power Platform solutions. Specialist in .NET 9, Azure Functions (Isolated Worker), Azure OpenAI & Cognitive Search integration, and Microsoft Dataverse custom development. Holds a First-Class Honors degree in Computer Science (GPA 3.75/4.00) with a proven track record of authoring high-performance APIs, automating complex business logic, and deploying enterprise-grade AI solutions.`,
   stats: [
     { value: "3+", label: "Years Experience", suffix: "" },
     { value: "3.75", label: "Honors GPA / 4.00", suffix: "" },
     { value: "100%", label: "On-Time Delivery", suffix: "" },
-    { value: "Enterprise", label: "Scale Architecture", suffix: "" }
+    { value: "Enterprise", label: "Client Solutions", suffix: "" }
   ]
 };
 
@@ -22,7 +22,7 @@ export const skillCategories = [
     id: "backend",
     name: "Languages & Frameworks",
     icon: "Code2",
-    description: "Modern backend and reactive web architectures with high performance and type safety",
+    description: "Modern backend and responsive web development with high performance and type safety",
     skills: [
       { name: "C#", level: 95, tag: "Primary" },
       { name: ".NET 9 / ASP.NET Core", level: 95, tag: "Expert" },
@@ -30,7 +30,7 @@ export const skillCategories = [
       { name: "React", level: 85, tag: "Frontend" },
       { name: "JavaScript (ES6+)", level: 90, tag: "Web" },
       { name: "SQL", level: 92, tag: "Data" },
-      { name: "jQuery / AJAX", level: 85, tag: "Legacy/Modern" }
+      { name: "jQuery / AJAX", level: 85, tag: "Web Tech" }
     ]
   },
   {
@@ -97,10 +97,10 @@ export const experiences = [
     type: "Full-Time",
     badge: "Current Role",
     highlights: [
-      "Backend Architecture & Azure Cloud: Architected, engineered, and deployed scalable backend microservices using Azure Functions (Isolated Worker Model) and C#, significantly enhancing cloud API performance and reliability.",
+      "Backend Development & Azure Cloud: Engineered and deployed scalable backend microservices using Azure Functions (Isolated Worker Model) and C#, significantly enhancing cloud API performance and reliability.",
       "Enterprise AI Integration: Engineered intelligent cloud solutions incorporating Azure OpenAI and Azure Search Index, enabling AI-driven semantic retrieval and automated response generation for client applications.",
-      "Dataverse & Plugin Development: Customized Dataverse environments by designing custom C# plugins, data models, and complex table relationships, facilitating seamless synchronization across core enterprise workflows.",
-      "Client Collaboration & Delivery: Collaborated directly with enterprise clients to scope technical requirements, ensuring 100% on-time project delivery aligned with clean architecture standards."
+      "Dataverse & Plugin Development: Customized Dataverse environments by developing custom C# plugins, data models, and complex table relationships, facilitating seamless synchronization across core enterprise workflows.",
+      "Client Collaboration & Delivery: Collaborated directly with enterprise clients to scope technical requirements, ensuring 100% on-time project delivery aligned with clean coding standards."
     ],
     technologies: ["C#", ".NET 9", "Azure Functions", "Azure OpenAI", "Azure Search", "Dataverse", "C# Plugins", "Agile"]
   },
@@ -139,7 +139,7 @@ export const projects = [
     title: "Seer 365 Project Workbook",
     category: "Enterprise Cloud Engine",
     subtitle: "Enterprise Estimation & Planning Engine",
-    description: "Architected a high-performance estimation engine on .NET 9 (Azure Functions Isolated Worker Model) integrated seamlessly with Microsoft Dataverse and Dynamics 365. Automated Rough Order of Magnitude (ROM) cost, effort, and task hierarchy calculations for complex enterprise implementations using dynamic topological dependency graphs and configuration-driven strategy design patterns.",
+    description: "Developed a high-performance estimation engine on .NET 9 (Azure Functions Isolated Worker Model) integrated seamlessly with Microsoft Dataverse and Dynamics 365. Automated Rough Order of Magnitude (ROM) cost, effort, and task hierarchy calculations for complex enterprise implementations using dynamic topological dependency graphs and configuration-driven strategy design patterns.",
     tech: [".NET 9", "Azure Functions Isolated", "Microsoft Dataverse", "Dynamics 365", "Topological Graphs", "Design Patterns"],
     featured: true,
     icon: "Cpu",
@@ -170,8 +170,8 @@ export const projects = [
   {
     id: "bakery-platform",
     title: "Full-Stack Bakery & Wholesale Management Platform",
-    category: "Full-Stack Architecture",
-    subtitle: "Clean Layered Architecture Web & Order System",
+    category: "Full-Stack Application",
+    subtitle: "Clean Layered Web & Order Management System",
     description: "Developed a full-stack platform using .NET 9 Web API, React, and PostgreSQL, adhering strictly to Clean Layered Architecture principles. Implemented JWT authentication, custom Entity Framework Core (EF Core) services, and automated background workers for 30-day database maintenance and data cleanup.",
     tech: [".NET 9 Web API", "React", "PostgreSQL", "EF Core", "JWT Auth", "Background Workers"],
     featured: false,

@@ -1,11 +1,11 @@
 ﻿import React from "react";
 import { motion } from "framer-motion";
-import { 
+import {
+  Layout, 
   Award, 
   Cpu, 
   Server, 
   Sparkles, 
-  GitBranch, 
   ShieldCheck, 
   Boxes, 
   Zap,
@@ -16,9 +16,17 @@ import { personalInfo, education } from "../data/portfolioData";
 export default function About() {
   const pillars = [
     {
+    icon: Layout,
+    title: "Full-Stack Web Dev",
+    desc: "Architecting responsive frontends with React & TypeScript coupled with scalable .NET Core Web APIs, Entity Framework, and modern RESTful services.",
+    color: "from-amber-500/20 to-orange-500/20",
+    border: "border-amber-500/30",
+    text: "text-amber-400"
+    },
+    {
       icon: Server,
       title: "Cloud & Microservices",
-      desc: "Architecting resilient serverless APIs with Azure Functions (Isolated Worker Model), C#, and asynchronous event-driven flows.",
+      desc: "Developing reliable serverless APIs with Azure Functions (Isolated Worker Model), C#, and asynchronous event-driven flows.",
       color: "from-cyan-500/20 to-blue-500/20",
       border: "border-cyan-500/30",
       text: "text-cyan-400"
@@ -41,8 +49,8 @@ export default function About() {
     },
     {
       icon: ShieldCheck,
-      title: "Clean Layered Architecture",
-      desc: "Enforcing repository patterns, topological dependency graph evaluation, EF Core ORM optimization, and automated maintenance jobs.",
+      title: "Clean Code & Quality",
+      desc: "Writing clean layered code with repository patterns, EF Core ORM optimization, and automated maintenance jobs.",
       color: "from-emerald-500/20 to-teal-500/20",
       border: "border-emerald-500/30",
       text: "text-emerald-400"
@@ -82,7 +90,7 @@ export default function About() {
             transition={{ delay: 0.2 }}
             className="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg"
           >
-            Combining rigorous computer science foundations with high-throughput cloud & AI engineering.
+            Combining solid computer science fundamentals with hands-on cloud, backend, and enterprise AI engineering.
           </motion.p>
         </div>
 
@@ -103,29 +111,28 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                    Architecting Enterprise-Grade Cloud & AI Systems
+                    Engineering Enterprise-Grade Cloud &amp; AI Solutions
                   </h3>
                   <p className="text-xs text-cyan-600 dark:text-cyan-400 font-mono">
-                    3+ Years Hands-on Production Engineering
+                    3+ Years Hands-on Software Engineering
                   </p>
                 </div>
               </div>
 
               <div className="space-y-4 text-slate-600 dark:text-slate-300 text-sm sm:text-base leading-relaxed">
                 <p>
-                  As a Software Engineer at <strong>One Billion Technology</strong>, I specialize in building 
-                  mission-critical cloud backends using <strong>.NET 9 (Azure Functions Isolated Worker Model)</strong>, 
+                  As a <strong>Software Engineer</strong> at <strong>One Billion Technology</strong>, I specialize in building 
+                  scalable cloud backends and enterprise solutions using <strong>.NET 9 (Azure Functions Isolated Worker Model)</strong>, 
                   <strong> Azure OpenAI</strong>, and <strong>Microsoft Dataverse</strong>.
                 </p>
                 <p>
-                  My engineering focus revolves around high performance, modular architecture, and sub-second 
-                  computation engines. I've designed automated estimation frameworks utilizing 
-                  <em> dynamic topological dependency graphs</em>, authored real-time RFP semantic search suites, 
-                  and developed custom C# Dataverse plugins for enterprise Dynamics 365 ecosystems.
+                  My engineering focus revolves around writing high-performance code, clean application logic, and dependable APIs. 
+                  I have developed automated estimation systems utilizing <em>dynamic topological dependency graphs</em>, built real-time RFP semantic search suites, 
+                  and authored custom C# Dataverse plugins for enterprise Dynamics 365 workflows.
                 </p>
                 <p>
                   With a First-Class Honors Degree in Computer Science from the University of Kelaniya (GPA 3.75/4.00), 
-                  I bridge mathematical precision with scalable software delivery.
+                  I bridge strong computer science principles with high-quality software delivery.
                 </p>
               </div>
             </div>

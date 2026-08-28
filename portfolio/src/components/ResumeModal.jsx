@@ -1,32 +1,18 @@
-import React from "react";
+﻿import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   X, 
   Printer, 
+  Download, 
   Mail, 
   Phone, 
-  MapPin
+  MapPin, 
+  Briefcase, 
+  GraduationCap, 
+  Award,
+  Layers
 } from "lucide-react";
-
-const Linkedin = ({ className = "w-4 h-4", ...props }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    {...props}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+import { LinkedinIcon } from "./Icons";
 import { personalInfo, experiences, projects, education, skillCategories } from "../data/portfolioData";
 
 export default function ResumeModal({ isOpen, onClose }) {
@@ -84,7 +70,7 @@ export default function ResumeModal({ isOpen, onClose }) {
               <div className="flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400 mt-3">
                 <span className="flex items-center gap-1"><Phone className="w-3 h-3 text-cyan-500" /> {personalInfo.phone}</span>
                 <span className="flex items-center gap-1"><Mail className="w-3 h-3 text-cyan-500" /> {personalInfo.email}</span>
-                <span className="flex items-center gap-1"><Linkedin className="w-3 h-3 text-blue-500" /> {personalInfo.linkedin}</span>
+                <span className="flex items-center gap-1"><LinkedinIcon className="w-3 h-3 text-blue-500" /> {personalInfo.linkedin}</span>
                 <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-purple-500" /> {personalInfo.location}</span>
               </div>
             </div>

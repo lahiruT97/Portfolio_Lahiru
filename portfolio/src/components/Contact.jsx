@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+﻿import React, { useState } from "react";
 import { motion } from "framer-motion";
 import confetti from "canvas-confetti";
 import { 
@@ -9,29 +9,12 @@ import {
   Check, 
   Copy, 
   MessageSquare, 
-  Sparkles, 
-  ArrowRight
+  Sparkles,
+  ArrowRight,
+  Loader2,
+  AlertCircle
 } from "lucide-react";
-
-const Linkedin = ({ className = "w-5 h-5", ...props }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    className={className}
-    {...props}
-  >
-    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-    <rect width="4" height="12" x="2" y="9" />
-    <circle cx="4" cy="4" r="2" />
-  </svg>
-);
+import { LinkedinIcon } from "./Icons";
 import { personalInfo } from "../data/portfolioData";
 
 export default function Contact() {
@@ -41,7 +24,9 @@ export default function Contact() {
     subject: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [copiedField, setCopiedField] = useState(null);
 
   const handleCopy = (text, field) => {
@@ -50,25 +35,65 @@ export default function Contact() {
     setTimeout(() => setCopiedField(null), 2500);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Trigger confetti celebration
-    try {
-      confetti({
-        particleCount: 80,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#00f2fe", "#4facfe", "#8a2be2", "#10b981"]
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    setIsSubmitting(true);
+    setErrorMessage("");
 
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 4000);
+    try {
+      // Direct real email delivery via FormSubmit AJAX service
+      const response = await fetch(`https://formsubmit.co/ajax/${personalInfo.email}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: `Portfolio Inquiry from ${formData.name}: ${formData.subject || 'New Message'}`,
+          message: formData.message,
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success === "true" || data.success === true || response.status === 200)) {
+        // Trigger celebratory confetti
+        try {
+          confetti({
+            particleCount: 90,
+            spread: 75,
+            origin: { y: 0.6 },
+            colors: ["#00f2fe", "#4facfe", "#8a2be2", "#10b981"]
+          });
+        } catch (err) {
+          console.log(err);
+        }
+
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error(data.message || "Failed to deliver message");
+      }
+    } catch (err) {
+      console.error("Form submission error:", err);
+      // Fallback: prompt user with direct mailto
+      setErrorMessage("Could not send directly via server. Opening your email app...");
+      const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      window.location.href = mailtoUrl;
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const openMailClient = () => {
+    const subject = formData.subject ? encodeURIComponent(formData.subject) : 'Portfolio Inquiry';
+    const body = encodeURIComponent(`Hi Lahiru,\n\n${formData.message || ''}\n\nBest regards,\n${formData.name || ''}`);
+    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -104,7 +129,7 @@ export default function Contact() {
             transition={{ delay: 0.2 }}
             className="mt-4 text-slate-600 dark:text-slate-400 max-w-2xl text-base sm:text-lg"
           >
-            Interested in backend architecture, .NET 9 cloud engineering, or enterprise AI consulting? Let's talk!
+            Interested in backend engineering, .NET 9 cloud development, or Microsoft Power Platform solutions? Send a message directly to my inbox!
           </motion.p>
         </div>
 
@@ -194,7 +219,7 @@ export default function Contact() {
             >
               <div className="flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/25 flex items-center justify-center text-blue-500 group-hover:scale-105 transition-transform">
-                  <Linkedin className="w-5 h-5" />
+                  <LinkedinIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs text-slate-400 font-mono">LinkedIn Profile</div>
@@ -236,7 +261,7 @@ export default function Contact() {
 
           </div>
 
-          {/* Right: Interactive Contact Form */}
+          {/* Right: Interactive Live Contact Form */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -244,23 +269,38 @@ export default function Contact() {
               viewport={{ once: true }}
               className="p-6 sm:p-8 rounded-3xl glass-card border border-slate-200 dark:border-slate-800"
             >
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">
-                Send a Direct Message
-              </h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+                  Send a Direct Message
+                </h3>
+                <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Delivered to {personalInfo.email}
+                </span>
+              </div>
+
               <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mb-6">
-                Fill out the form below and I will respond to your inquiry promptly.
+                Fill out the form below to send an email directly to my inbox.
               </p>
+
+              {errorMessage && (
+                <div className="p-3 mb-4 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{errorMessage}</span>
+                </div>
+              )}
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Your Name
+                      Your Name *
                     </label>
                     <input
                       type="text"
+                      name="name"
                       required
-                      placeholder="Jane Doe"
+                      placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white outline-none transition-all"
@@ -269,12 +309,13 @@ export default function Contact() {
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                      Your Email
+                      Your Email Address *
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
-                      placeholder="jane@company.com"
+                      placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       className="w-full px-4 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white outline-none transition-all"
@@ -284,10 +325,11 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                    Subject
+                    Subject *
                   </label>
                   <input
                     type="text"
+                    name="subject"
                     required
                     placeholder="Project Inquiry / Engineering Opportunity"
                     value={formData.subject}
@@ -298,39 +340,57 @@ export default function Contact() {
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
-                    Message
+                    Message *
                   </label>
                   <textarea
+                    name="message"
                     rows={4}
                     required
-                    placeholder="Tell me about your architectural goals or project scope..."
+                    placeholder="Tell me about your project scope, timeline, or opportunity..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     className="w-full px-4 py-2.5 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 text-slate-900 dark:text-white outline-none transition-all resize-none"
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={submitted}
-                  className={`w-full py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all duration-300 ${
-                    submitted
-                      ? "bg-emerald-500 text-white shadow-emerald-500/20"
-                      : "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5"
-                  }`}
-                >
-                  {submitted ? (
-                    <>
-                      <Check className="w-4 h-4" />
-                      <span>Message Sent Successfully!</span>
-                    </>
-                  ) : (
-                    <>
-                      <Send className="w-4 h-4" />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting || submitted}
+                    className={`flex-1 py-3.5 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all duration-300 ${
+                      submitted
+                        ? "bg-emerald-500 text-white shadow-emerald-500/20"
+                        : "bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-white shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 disabled:opacity-70 disabled:hover:translate-y-0"
+                    }`}
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <span>Sending Message...</span>
+                      </>
+                    ) : submitted ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        <span>Message Sent to {personalInfo.email}!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4" />
+                        <span>Send Message</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={openMailClient}
+                    className="px-4 py-3 rounded-xl font-semibold text-xs text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-1.5"
+                    title="Open your email application (Outlook/Gmail)"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-cyan-500" />
+                    <span>Open Email App</span>
+                  </button>
+                </div>
               </form>
             </motion.div>
           </div>
