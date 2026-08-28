@@ -48,7 +48,7 @@ export default function Projects() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight"
           >
-            Key <span className="gradient-text">Projects &amp; Architecture</span>
+            Key <span className="gradient-text">Projects &amp; Deliverables</span>
           </motion.h2>
 
           <motion.p
@@ -170,7 +170,7 @@ export default function Projects() {
 
                 <div className="p-4 rounded-2xl bg-cyan-500/5 border border-cyan-500/20 mb-6">
                   <h4 className="text-xs font-bold font-mono text-cyan-500 uppercase tracking-wider mb-1">
-                    Key Architectural Value
+                    Key Value &amp; Impact
                   </h4>
                   <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
                     {selectedProject.impact}
