@@ -35,33 +35,29 @@ export default function Contact() {
     setTimeout(() => setCopiedField(null), 2500);
   };
 
+  // Handle submit:
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setErrorMessage("");
 
+    // Resolves to current domain in production (relative path) or explicit URL in local dev
+    const baseUrl = import.meta.env.VITE_API_BASE_URL || "";
+    const endpoint = `${baseUrl}/api/contact`;
+
     try {
-      // Direct real email delivery via FormSubmit AJAX service
-      const response = await fetch(`https://formsubmit.co/ajax/${personalInfo.email}`, {
+      const response = await fetch(endpoint, {
         method: "POST",
-        headers: {
+        headers: { 
           "Content-Type": "application/json",
-          "Accept": "application/json"
+          "Accept": "application/json" 
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          _subject: `Portfolio Inquiry from ${formData.name}: ${formData.subject || 'New Message'}`,
-          message: formData.message,
-          _template: "table",
-          _captcha: "false"
-        })
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
 
-      if (response.ok && (data.success === "true" || data.success === true || response.status === 200)) {
-        // Trigger celebratory confetti
+      if (response.ok) {
         try {
           confetti({
             particleCount: 90,
@@ -81,7 +77,8 @@ export default function Contact() {
       }
     } catch (err) {
       console.error("Form submission error:", err);
-      // Fallback: prompt user with direct mailto
+      
+      // Fallback trigger if endpoint is unreachable or fails
       setErrorMessage("Could not send directly via server. Opening your email app...");
       const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
       window.location.href = mailtoUrl;
@@ -90,11 +87,6 @@ export default function Contact() {
     }
   };
 
-  const openMailClient = () => {
-    const subject = formData.subject ? encodeURIComponent(formData.subject) : 'Portfolio Inquiry';
-    const body = encodeURIComponent(`Hi Lahiru,\n\n${formData.message || ''}\n\nBest regards,\n${formData.name || ''}`);
-    window.location.href = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
-  };
 
   return (
     <section id="contact" className="py-20 lg:py-32 relative bg-slate-100/50 dark:bg-slate-950/40">
@@ -275,7 +267,7 @@ export default function Contact() {
                 </h3>
                 <span className="text-[11px] font-mono font-semibold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  Delivered to {personalInfo.email}
+                  Delivered to {personalInfo.name}
                 </span>
               </div>
 
@@ -371,7 +363,7 @@ export default function Contact() {
                     ) : submitted ? (
                       <>
                         <Check className="w-4 h-4" />
-                        <span>Message Sent to {personalInfo.email}!</span>
+                        <span>Message Sent to {personalInfo.name}!</span>
                       </>
                     ) : (
                       <>
@@ -379,16 +371,6 @@ export default function Contact() {
                         <span>Send Message</span>
                       </>
                     )}
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={openMailClient}
-                    className="px-4 py-3 rounded-xl font-semibold text-xs text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-1.5"
-                    title="Open your email application (Outlook/Gmail)"
-                  >
-                    <Mail className="w-3.5 h-3.5 text-cyan-500" />
-                    <span>Open Email App</span>
                   </button>
                 </div>
               </form>
