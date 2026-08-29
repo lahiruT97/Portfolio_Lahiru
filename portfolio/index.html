@@ -14,6 +14,22 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" />
     </noscript>
     <link rel="preload" as="image" href="/lahiru-cut3.png" fetchpriority="high" />
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem("lahiru_portfolio_theme");
+          var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+          var isDark = saved !== null ? saved === "dark" : prefersDark;
+          if (isDark) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.classList.remove("light");
+          } else {
+            document.documentElement.classList.remove("dark");
+            document.documentElement.classList.add("light");
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="bg-slate-950 text-slate-100 selection:bg-cyan-500 selection:text-white transition-colors duration-500 font-sans antialiased overflow-x-hidden">
     <div id="root"></div>
