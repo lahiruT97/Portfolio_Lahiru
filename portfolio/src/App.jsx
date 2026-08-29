@@ -19,10 +19,30 @@ export default function App() {
     if (saved !== null) {
       return saved === "dark";
     }
-    return true; // Default to sleek dark mode
+    // Prioritize device / OS mode for first-time visitors
+    if (typeof window !== "undefined" && window.matchMedia) {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    }
+    return true;
   });
 
   const [isResumeOpen, setIsResumeOpen] = useState(false);
+
+  // Listen to OS/Device theme changes if user hasn't manually overridden it
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+    const handleChange = (e) => {
+      const saved = localStorage.getItem("lahiru_portfolio_theme");
+      if (saved === null) {
+        setIsDark(e.matches);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;

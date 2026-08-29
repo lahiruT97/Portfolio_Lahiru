@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   Terminal, 
@@ -82,7 +82,7 @@ public class ProjectWorkbookEngine : IEstimationEngine
   };
 
   return (
-    <section id="hero" className="relative pt-32 pb-20 lg:pt-36 lg:pb-32 overflow-hidden">
+    <section id="hero" className="relative pt-28 pb-16 lg:pt-36 lg:pb-32 overflow-hidden">
       {/* Background ambient lighting */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-500/20 to-purple-600/20 rounded-full blur-[140px] pointer-events-none -z-10" />
       <div className="absolute top-10 right-10 w-72 h-72 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -94,12 +94,7 @@ public class ProjectWorkbookEngine : IEstimationEngine
           <div className="lg:col-span-7 flex flex-col items-start text-left">
             
             {/* Status Pill */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-slate-900/90 light:bg-slate-100 border border-slate-700/60 dark:border-cyan-500/30 text-xs font-semibold shadow-sm mb-6"
-            >
+            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/80 dark:bg-slate-900/90 light:bg-slate-100 border border-slate-700/60 dark:border-cyan-500/30 text-xs font-semibold shadow-sm mb-6">
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
@@ -110,64 +105,44 @@ public class ProjectWorkbookEngine : IEstimationEngine
               <span className="px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 dark:text-cyan-300 text-[10px] font-mono font-bold tracking-wider uppercase">
                 First-Class (GPA 3.75)
               </span>
-            </motion.div>
+            </div>
 
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]"
-            >
+            {/* Main Heading — Instant Paint */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
               Hi, I'm <br />
               <span className="gradient-text font-black">
                 {personalInfo.name}
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Dynamic Animated Subtitle */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="h-9 my-3 flex items-center"
-            >
+            <div className="h-9 my-3 flex items-center">
               <span className="text-lg sm:text-xl font-mono font-medium text-slate-700 dark:text-slate-300 flex items-center gap-2">
                 <span className="text-cyan-500 font-bold">&gt;</span>
                 <motion.span
                   key={roleIndex}
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.3 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.25 }}
                   className="text-cyan-600 dark:text-cyan-400 font-semibold"
                 >
                   {roles[roleIndex]}
                 </motion.span>
                 <span className="w-2 h-5 bg-cyan-500 animate-pulse inline-block"></span>
               </span>
-            </motion.div>
+            </div>
 
             {/* Professional Summary */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-slate-600 dark:text-slate-300 light:text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl mb-8"
-            >
+            <p className="text-slate-600 dark:text-slate-300 light:text-slate-700 text-base sm:text-lg leading-relaxed max-w-2xl mb-8">
               Software Engineer with <strong>3+ years of hands-on experience</strong> engineering scalable 
               cloud microservices on <strong>.NET 9 &amp; Azure</strong>, integrating 
               <strong> Azure OpenAI</strong> solutions, and building custom 
               <strong> Microsoft Dataverse &amp; Power Platform</strong> enterprise applications.
-            </motion.p>
+            </p>
 
             {/* Quick Contact & Info Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-8"
-            >
+            <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-slate-600 dark:text-slate-400 mb-8">
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                 <MapPin className="w-4 h-4 text-cyan-500" />
                 <span>{personalInfo.location}</span>
@@ -195,15 +170,10 @@ public class ProjectWorkbookEngine : IEstimationEngine
                   <Copy className="w-3.5 h-3.5 opacity-50" />
                 )}
               </button>
-            </motion.div>
+            </div>
 
             {/* Action Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4"
-            >
+            <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-white bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-0.5 transition-all duration-200"
@@ -219,18 +189,13 @@ public class ProjectWorkbookEngine : IEstimationEngine
                 <Download className="w-4 h-4 text-cyan-500" />
                 <span>View / Download CV</span>
               </button>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right Column: Profile Picture Showcase + Floating Tech Icons */}
           <div className="lg:col-span-5 flex flex-col items-center justify-center relative">
             
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative flex items-center justify-center"
-            >
+            <div className="relative flex items-center justify-center">
               {/* Outer Decorative Tech Rings — mode-aware opacity */}
               <div className="absolute w-[360px] h-[360px] sm:w-[440px] sm:h-[440px] rounded-full border border-cyan-500/30 dark:border-cyan-500/20 animate-spin-slow pointer-events-none" />
               <div className="absolute w-[320px] h-[320px] sm:w-[390px] sm:h-[390px] rounded-full border border-dashed border-indigo-500/40 dark:border-indigo-500/30 animate-reverse-spin pointer-events-none" />
@@ -302,7 +267,7 @@ public class ProjectWorkbookEngine : IEstimationEngine
                 <Database className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
                 <span className="text-[10px] font-bold text-slate-800 dark:text-slate-200">Dataverse SDK</span>
               </motion.div>
-            </motion.div>
+            </div>
 
             {/* Quick Stats Bar */}
             <div className="grid grid-cols-3 gap-3 w-full max-w-md mt-10">
@@ -322,6 +287,49 @@ public class ProjectWorkbookEngine : IEstimationEngine
 
           </div>
 
+        </div>
+
+        {/* Code Snippet Interactive Terminal Showcase */}
+        <div className="mt-16 lg:mt-24 max-w-4xl mx-auto code-window overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+              <span className="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+              <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+              <span className="text-xs font-mono text-slate-400 ml-2 hidden sm:inline">
+                LahiruPathiranage.BackendService.cs
+              </span>
+            </div>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => setActiveCodeTab("azure-func")}
+                className={`px-3 py-1 rounded-md text-xs font-mono transition-colors ${
+                  activeCodeTab === "azure-func"
+                    ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                AzureFunction.cs
+              </button>
+              <button
+                onClick={() => setActiveCodeTab("clean-arch")}
+                className={`px-3 py-1 rounded-md text-xs font-mono transition-colors ${
+                  activeCodeTab === "clean-arch"
+                    ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
+                    : "text-slate-400 hover:text-slate-200"
+                }`}
+              >
+                WorkbookEngine.cs
+              </button>
+            </div>
+          </div>
+
+          <div className="p-4 sm:p-6 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed bg-slate-950/95 text-slate-200">
+            <pre className="text-slate-300">
+              <code>{codeSnippets[activeCodeTab]}</code>
+            </pre>
+          </div>
         </div>
 
       </div>
