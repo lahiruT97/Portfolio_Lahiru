@@ -76,7 +76,9 @@ export default function Footer() {
             </a>
 
             <a
-              href={`mailto:${personalInfo.email}`}
+              href={`https://mail.google.com/mail/?view=cm&fs=1&to=${personalInfo.email}`}
+              target="_blank"
+              rel="noreferrer"
               className="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:text-cyan-500 border border-slate-200 dark:border-slate-800 transition-colors"
               aria-label="Email"
             >
@@ -106,9 +108,6 @@ export default function Footer() {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div>
             &copy; {new Date().getFullYear()} Lahiru Pathiranage. All rights reserved.
-          </div>
-          <div className="flex items-center gap-1">
-            <span>Engineered with React, Tailwind CSS &amp; Framer Motion</span>
           </div>
         </div>
 

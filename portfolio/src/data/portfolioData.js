@@ -1,11 +1,11 @@
-﻿export const personalInfo = {
+export const personalInfo = {
   name: "Lahiru Pathiranage",
   title: "Software Engineer",
   subtitle: "Backend Development · Azure Cloud · Microsoft Power Platform & AI Solutions",
   status: "Available for new opportunities",
-  location: "Colombo, Sri Lanka",
+  location: "Ja-Ela, Sri Lanka",
   phone: "+94 71 95 20 383",
-  email: "lahiruthraka97@gmail.com",
+  email: import.meta.env.VITE_CONTACT_EMAIL || "",
   linkedin: "https://linkedin.com/in/lahiru-pathiranage-2330a0240",
   github: "https://github.com",
   summary: `Results-driven Software Engineer with 3+ years of hands-on experience designing and delivering scalable backend systems, cloud microservices, and enterprise Microsoft Power Platform solutions. Specialist in .NET 9, Azure Functions (Isolated Worker), Azure OpenAI & Cognitive Search integration, and Microsoft Dataverse custom development. Holds a First-Class Honors degree in Computer Science (GPA 3.75/4.00) with a proven track record of authoring high-performance APIs, automating complex business logic, and deploying enterprise-grade AI solutions.`,
