@@ -43,44 +43,6 @@ export default function Hero({ onOpenResume }) {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const codeSnippets = {
-    "azure-func": `// Seer 365 AI RFP Pipeline (.NET 9 Isolated Worker)
-[Function("ProcessEnterpriseRFP")]
-public async Task<RFPResponse> Run(
-    [HttpTrigger(AuthorizationLevel.Function, "post")] HttpRequestData req)
-{
-    var context = await req.ReadFromJsonAsync<RFPContext>();
-    
-    // Semantic Vector Query via Azure Cognitive Search
-    var vectors = await _searchIndex.QueryVectorsAsync(context.DocumentId);
-    
-    // Azure OpenAI Semantic Reasoning
-    var response = await _openAiClient.GenerateCompletionAsync(vectors);
-    
-    // Sync Enterprise CRM Dataverse Entity
-    await _dataverseService.UpsertRecordAsync("seer_rfp_result", response);
-    return new RFPResponse { Status = "Indexed & Synced", LatencyMs = 42 };
-}`,
-    "clean-arch": `// Topological Dependency Engine
-public class ProjectWorkbookEngine : IEstimationEngine
-{
-    private readonly IDataverseRepository _repository;
-    
-    public async Task<ROMCostPlan> CalculateHierarchyAsync(Guid projectId)
-    {
-        var graph = await _repository.BuildTopologicalGraphAsync(projectId);
-        var calculatedNodes = graph.EvaluateStrategyPatterns();
-        
-        return new ROMCostPlan
-        {
-            TotalEffortHours = calculatedNodes.Sum(n => n.Effort),
-            ConfidenceScore = 0.98,
-            ExecutionModel = "IsolatedWorker.NET9"
-        };
-    }
-}`
-  };
-
   return (
     <section id="hero" className="relative pt-28 pb-16 lg:pt-36 lg:pb-32 overflow-hidden">
       {/* Background ambient lighting */}
@@ -287,49 +249,6 @@ public class ProjectWorkbookEngine : IEstimationEngine
 
           </div>
 
-        </div>
-
-        {/* Code Snippet Interactive Terminal Showcase */}
-        <div className="mt-16 lg:mt-24 max-w-4xl mx-auto code-window overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-slate-900/90 border-b border-slate-800">
-            <div className="flex items-center gap-2">
-              <span className="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
-              <span className="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-              <span className="text-xs font-mono text-slate-400 ml-2 hidden sm:inline">
-                LahiruPathiranage.BackendService.cs
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5">
-              <button
-                onClick={() => setActiveCodeTab("azure-func")}
-                className={`px-3 py-1 rounded-md text-xs font-mono transition-colors ${
-                  activeCodeTab === "azure-func"
-                    ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
-              >
-                AzureFunction.cs
-              </button>
-              <button
-                onClick={() => setActiveCodeTab("clean-arch")}
-                className={`px-3 py-1 rounded-md text-xs font-mono transition-colors ${
-                  activeCodeTab === "clean-arch"
-                    ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/40"
-                    : "text-slate-400 hover:text-slate-200"
-                }`}
-              >
-                WorkbookEngine.cs
-              </button>
-            </div>
-          </div>
-
-          <div className="p-4 sm:p-6 overflow-x-auto text-xs sm:text-sm font-mono leading-relaxed bg-slate-950/95 text-slate-200">
-            <pre className="text-slate-300">
-              <code>{codeSnippets[activeCodeTab]}</code>
-            </pre>
-          </div>
         </div>
 
       </div>
