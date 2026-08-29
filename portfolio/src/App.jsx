@@ -1,15 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense, lazy } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Experience from "./components/Experience";
-import Projects from "./components/Projects";
-import Education from "./components/Education";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import ResumeModal from "./components/ResumeModal";
 import ParticleBackground from "./components/ParticleBackground";
+
+// Lazy-load below-the-fold sections — reduces initial JS parse time
+const About        = lazy(() => import("./components/About"));
+const Skills       = lazy(() => import("./components/Skills"));
+const Experience   = lazy(() => import("./components/Experience"));
+const Projects     = lazy(() => import("./components/Projects"));
+const Education    = lazy(() => import("./components/Education"));
+const Contact      = lazy(() => import("./components/Contact"));
+const Footer       = lazy(() => import("./components/Footer"));
+const ResumeModal  = lazy(() => import("./components/ResumeModal"));
 
 export default function App() {
   const [isDark, setIsDark] = useState(() => {
@@ -51,25 +53,34 @@ export default function App() {
         onOpenResume={() => setIsResumeOpen(true)} 
       />
 
-      {/* Main Content Sections */}
+      {/* Hero loads eagerly (above the fold) */}
       <main className="relative z-10">
         <Hero onOpenResume={() => setIsResumeOpen(true)} />
-        <About />
-        <Skills />
-        <Experience />
-        <Projects />
-        <Education />
-        <Contact />
+
+        {/* Below-fold sections stream in as user scrolls */}
+        <Suspense fallback={null}>
+          <About />
+          <Skills />
+          <Experience />
+          <Projects />
+          <Education />
+          <Contact />
+        </Suspense>
       </main>
 
-      {/* Footer */}
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
-      {/* Interactive Resume View / Download Modal */}
-      <ResumeModal 
-        isOpen={isResumeOpen} 
-        onClose={() => setIsResumeOpen(false)} 
-      />
+      {/* Resume modal — only loaded when opened */}
+      <Suspense fallback={null}>
+        {isResumeOpen && (
+          <ResumeModal 
+            isOpen={isResumeOpen} 
+            onClose={() => setIsResumeOpen(false)} 
+          />
+        )}
+      </Suspense>
     </div>
   );
 }
