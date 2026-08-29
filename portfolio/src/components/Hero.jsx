@@ -246,6 +246,9 @@ public class ProjectWorkbookEngine : IEstimationEngine
                   <img
                     src="lahiru-cut3.png"
                     alt="Lahiru Pathiranage"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
                     className="w-auto h-[96%] object-contain drop-shadow-[0_15px_30px_rgba(0,0,0,0.8)] group-hover:scale-105 transition-transform duration-700 relative z-10"
                   />
                   
