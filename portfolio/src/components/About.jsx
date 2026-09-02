@@ -111,7 +111,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-                    Engineering Enterprise-Grade Cloud &amp; AI Solutions
+                    .NET Backend Engineer-Grade Cloud &amp; AI Solutions
                   </h3>
                   <p className="text-xs text-cyan-600 dark:text-cyan-400 font-mono">
                     3+ Years Hands-on Software Engineering

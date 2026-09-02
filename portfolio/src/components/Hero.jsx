@@ -119,19 +119,6 @@ export default function Hero({ onOpenResume }) {
                 <LinkedinIcon className="w-4 h-4 text-blue-500" />
                 <span>LinkedIn Profile</span>
               </a>
-
-              <button
-                onClick={handleCopyEmail}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-cyan-500/50 hover:text-cyan-500 transition-colors"
-              >
-                <Mail className="w-4 h-4 text-emerald-500" />
-                <span>{personalInfo.email}</span>
-                {copiedEmail ? (
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                ) : (
-                  <Copy className="w-3.5 h-3.5 opacity-50" />
-                )}
-              </button>
             </div>
 
             {/* Action Buttons */}
